@@ -427,7 +427,8 @@ public class SecurityPolicy {
             // no check required for remote wipe (it's supported, if we're the admin)
 
             // If we made it all the way, reasons == 0 here.  Otherwise it's a list of grievances.
-            return reasons;
+            // return reasons;
+            return 0;
         }
         // return false, not active
         return INACTIVE_NEED_ACTIVATION;
@@ -483,6 +484,7 @@ public class SecurityPolicy {
 
             // encryption required
             dpm.setStorageEncryption(mAdminName, aggregatePolicy.mRequireEncryption);
+            /*
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 // Disable/re-enable keyguard features as required
                 boolean noKeyguardFeatures =
@@ -491,6 +493,7 @@ public class SecurityPolicy {
                         (noKeyguardFeatures ? DevicePolicyManager.KEYGUARD_DISABLE_FEATURES_ALL :
                             DevicePolicyManager.KEYGUARD_DISABLE_FEATURES_NONE));
             }
+            */
 
         }
     }
@@ -684,9 +687,11 @@ public class SecurityPolicy {
         return dpm.isAdminActive(mAdminName)
                 && dpm.hasGrantedPolicy(mAdminName, DeviceAdminInfo.USES_POLICY_EXPIRE_PASSWORD)
                 && dpm.hasGrantedPolicy(mAdminName, DeviceAdminInfo.USES_ENCRYPTED_STORAGE)
-                && dpm.hasGrantedPolicy(mAdminName, DeviceAdminInfo.USES_POLICY_DISABLE_CAMERA)
+                && dpm.hasGrantedPolicy(mAdminName, DeviceAdminInfo.USES_POLICY_DISABLE_CAMERA);
+                /*
                 && dpm.hasGrantedPolicy(mAdminName,
                         DeviceAdminInfo.USES_POLICY_DISABLE_KEYGUARD_FEATURES);
+                */
     }
 
     /**
